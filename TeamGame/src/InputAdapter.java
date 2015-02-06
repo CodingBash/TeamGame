@@ -3,43 +3,67 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class InputAdapter implements MouseListener, KeyListener{
-
-	//An input adapter object acts as the connection between keyboard/mouse and
-	//the game objects. It receives the native OS keyboard events, and distributes
-	//them to the screen object and the two player objects.
-	//ScreenInterface defines the required methods for the screen - for now, just a pause action and a quit action.
-	//Controllable defines the methods that players/characters must implement
+/*
+ * An input adapter object acts as the connection between keyboard/mouse and
+ * the game objects. It receives the native OS keyboard events, and
+ * distributes them to the screen object and the two player objects.
+ * ScreenInterface defines the required methods for the screen - for now,
+ * just a pause action and a quit action.
+ * Controllable defines the methods that players/characters must implement.
+ */
+public class InputAdapter implements MouseListener, KeyListener {
 
 	ScreenInterface screen;
 	Controllable p1, p2;
+	boolean[] keys1, keys2;
 	
-	public InputAdapter(ScreenInterface si,  Controllable c1, Controllable c2){
-			screen = si;
-			p1 = c1;
-			p2 = c2;
-	}
-	
-	@Override
-	public void keyPressed(KeyEvent e) {		
+	public InputAdapter(ScreenInterface si, Controllable c1, Controllable c2) {
+		screen = si;
+		p1 = c1;
+		p2 = c2;
+		keys1 = new boolean[6];
+		keys2 = new boolean[6];
 	}
 
+	public void dispatchEvents() {
+		p1.inputChange(keys1);
+		p2.inputChange(keys2);
+	}
+	
+	@Override
+	public void keyPressed(KeyEvent e) {
+		if (e.getKeyCode() == KeyEvent.VK_W) keys1[0] = true;
+		if (e.getKeyCode() == KeyEvent.VK_S) keys1[1] = true;
+		if (e.getKeyCode() == KeyEvent.VK_A) keys1[2] = true;
+		if (e.getKeyCode() == KeyEvent.VK_D) keys1[3] = true;
+		if (e.getKeyCode() == KeyEvent.VK_O) keys2[0] = true;
+		if (e.getKeyCode() == KeyEvent.VK_L) keys2[1] = true;
+		if (e.getKeyCode() == KeyEvent.VK_K) keys2[2] = true;
+		if (e.getKeyCode() == KeyEvent.VK_SEMICOLON) keys2[3] = true;
+		//TODO add button A and B keys
+		dispatchEvents();
+	}
+	
 	@Override
 	public void keyReleased(KeyEvent e) {
+		if (e.getKeyCode() == KeyEvent.VK_W) keys1[0] = false;
+		if (e.getKeyCode() == KeyEvent.VK_S) keys1[1] = false;
+		if (e.getKeyCode() == KeyEvent.VK_A) keys1[2] = false;
+		if (e.getKeyCode() == KeyEvent.VK_D) keys1[3] = false;
+		if (e.getKeyCode() == KeyEvent.VK_O) keys2[0] = false;
+		if (e.getKeyCode() == KeyEvent.VK_L) keys2[1] = false;
+		if (e.getKeyCode() == KeyEvent.VK_K) keys2[2] = false;
+		if (e.getKeyCode() == KeyEvent.VK_SEMICOLON) keys2[3] = false;
+		//TODO add button A and B keys
+		dispatchEvents();
 	}
 
 	@Override
 	public void keyTyped(KeyEvent e) {
-		if(e.getKeyChar()=='Q' || e.getKeyChar()=='q') screen.quit();
-		if(e.getKeyChar()=='P' || e.getKeyChar()=='p') screen.pause();
-		if(e.getKeyChar()=='W' || e.getKeyChar()=='w') p1.up();
-		if(e.getKeyChar()=='A' || e.getKeyChar()=='a') p1.left();
-		if(e.getKeyChar()=='S' || e.getKeyChar()=='s') p1.down();
-		if(e.getKeyChar()=='D' || e.getKeyChar()=='d') p1.right();
-		if(e.getKeyChar()=='O' || e.getKeyChar()=='o') p2.up();
-		if(e.getKeyChar()=='K' || e.getKeyChar()=='k') p2.left();
-		if(e.getKeyChar()=='L' || e.getKeyChar()=='l') p2.down();
-		if(e.getKeyChar()==';' || e.getKeyChar()==':') p2.right();
+		if (e.getKeyChar() == 'Q' || e.getKeyChar() == 'q')
+			screen.quit();
+		if (e.getKeyChar() == 'P' || e.getKeyChar() == 'p')
+			screen.pause();
 	}
 
 	@Override

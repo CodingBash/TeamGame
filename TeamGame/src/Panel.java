@@ -17,6 +17,8 @@ public class Panel extends JPanel implements ScreenInterface {
 		width = 800;
 		pause = false;
 		quit = false;
+		player1 = new TestCharacter(100, 100);
+		player2 = new TestCharacter(400, 400);
 		setPreferredSize(new Dimension(width, height));
 		setBackground(Color.BLACK);
 		InputAdapter ia = new InputAdapter(this, player1, player2);
@@ -26,14 +28,20 @@ public class Panel extends JPanel implements ScreenInterface {
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
+		player1.paint(g);
+		player2.paint(g);
 	}
 
 	public void run() {
 		while (!quit) {
-			if (!pause)
+			if (!pause) {
+				player1.update();
+				player2.update();
 				repaint();
-			// TODO Convert timing method to use Swing timer instead of delay()
-			delay(50);
+				// TODO Convert timing method to use Swing timer instead of
+				// delay()
+				delay(50);
+			}
 		}
 	}
 
