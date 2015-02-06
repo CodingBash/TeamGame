@@ -6,19 +6,21 @@ public class TestCharacter implements Controllable{
 
 	//implement any state fields that you need here
 	int xPos, yPos;
+	Color c;
 	int speed;
 	boolean up, down, left, right, buttonA, buttonB;
 	
 	//write a constructor that accepts initial screen coordinates
-	public TestCharacter(int x, int y){
+	public TestCharacter(int x, int y, Color col){
 		xPos = x;
 		yPos = y;
 		speed = 3;
+		c = col;
 	}
 	
 	@Override
 	public void paint(Graphics g) {
-		g.setColor(Color.GREEN);
+		g.setColor(c);
 		g.fillOval(xPos-5,  yPos-5,  10,  10);
 	}
 

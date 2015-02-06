@@ -17,8 +17,8 @@ public class Panel extends JPanel implements ScreenInterface {
 		width = 800;
 		pause = false;
 		quit = false;
-		player1 = new TestCharacter(100, 100);
-		player2 = new TestCharacter(400, 400);
+		player1 = new TestCharacter(100, 100, Color.GREEN);
+		player2 = new TestCharacter(400, 400, Color.RED);
 		setPreferredSize(new Dimension(width, height));
 		setBackground(Color.BLACK);
 		InputAdapter ia = new InputAdapter(this, player1, player2);
