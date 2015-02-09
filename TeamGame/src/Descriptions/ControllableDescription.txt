@@ -2,4 +2,4 @@ Controllable Interface Description:
 
 Controllable is an interface that sets an outline
 for other objects that need data to be changed by
-input. Ex: position. 
+input/game engine. Ex: position. 
