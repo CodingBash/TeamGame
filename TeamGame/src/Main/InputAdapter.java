@@ -15,7 +15,7 @@ import java.awt.event.MouseListener;
 public class InputAdapter implements MouseListener, KeyListener {
 
 	ScreenInterface screen;
-	Controllable p1, p2;
+	Controllable p1, p2, menu1;
 	boolean[] keys1, keys2;
 	
 	public InputAdapter(ScreenInterface si, Controllable c1, Controllable c2) {
