@@ -1,0 +1,5 @@
+GameState Description
+
+This class is responsible for holding properties for a "game state" such as
+if the game is in a menu or in a battle. [To be updated]
+(Look at GameStateManager description)

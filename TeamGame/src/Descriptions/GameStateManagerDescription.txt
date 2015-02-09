@@ -1,0 +1,5 @@
+GameStateManager Class Description
+
+This is a class that handles all the separate GameStates as a list. 
+The manager is responsible for adding, switching, updating, drawing states.
+(Look at GameState description)

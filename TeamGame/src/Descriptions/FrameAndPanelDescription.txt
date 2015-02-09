@@ -1,0 +1,8 @@
+Frame and Panel Description:
+
+The "Frame" class contains statements on the JFrame or the
+window of the game. The JFrame consists of a JPanel. The JPanel is
+essentially a container within the game window. You are able to set specific
+settings within each of these "containers". Visit 
+http://docs.oracle.com/javase/tutorial/uiswing/components/panel.html
+for more information and an really good example.

@@ -1,3 +1,4 @@
+package Main;
 import java.awt.Graphics;
 
 /* Controllable defines an interface for character objects
