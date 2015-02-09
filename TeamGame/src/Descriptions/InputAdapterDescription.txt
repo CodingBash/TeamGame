@@ -1,6 +1,10 @@
 InputAdapter Class Description
 
-InputAdapter is a manager that sets specific Mouse and Key events to other classes
-such as the players. This usually is sent to classes that implements Controllable 
-since it inherits a method called inputChange(boolean[] keys) which the
-InputAdapter class is where the "boolea[] keys" are created. 
+/*
+ * An input adapter object acts as the connection between keyboard/mouse and
+ * the game objects. It receives the native OS keyboard events, and
+ * distributes them to the screen object and the two player objects.
+ * ScreenInterface defines the required methods for the screen - for now,
+ * just a pause action and a quit action.
+ * Controllable defines the methods that players/characters must implement.
+ */

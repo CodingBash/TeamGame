@@ -31,7 +31,7 @@ public class SpriteManager {
 	public SpriteManager(String file, int w, int h) {
 		animQueue = new ArrayList<Integer>();
 		try {
-			spriteSheet = ImageIO.read(new File(file));
+			spriteSheet = ImageIO.read(new File("Resources/Images/"+file));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
