@@ -1,4 +1,5 @@
 package Main;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -8,33 +9,28 @@ import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
 public class Panel extends JPanel implements ScreenInterface, Runnable {
-
 	// declare fields here
-	
-	//dimensions
+	// dimensions
 	public static final int HEIGHT = 240;
 	public static final int WIDTH = 320;
 	public static final int SCALE = 2;
-	
-	//game thread
+	// game thread
 	private Thread thread;
 	private boolean running;
 	private int FPS = 60;
-	private long targetTime = 1000/FPS;
-	
-	//image field
+	private long targetTime = 1000 / FPS;
+	// image field
 	private BufferedImage image;
-	
 	boolean pause, quit;
 	Controllable player1, player2;
 
 	public Panel() {
-		//super();
+		// super();
 		pause = false;
 		quit = false;
 		player1 = new TestCharacter(100, 100);
 		player2 = new TestCharacter(400, 400);
-		setPreferredSize(new Dimension(WIDTH*SCALE, HEIGHT*SCALE));
+		setPreferredSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
 		setFocusable(true);
 		requestFocusInWindow();
 		setBackground(Color.BLACK);
@@ -42,45 +38,59 @@ public class Panel extends JPanel implements ScreenInterface, Runnable {
 		addMouseListener(ia);
 		addKeyListener(ia);
 	}
-	
+
 	/**
 	 * addNotify: For thread action
 	 */
-	public void addNotify(){
+	public void addNotify() {
 		super.addNotify();
-		if(thread==null)
+		if (thread == null)
 			thread = new Thread((Runnable) this);
 		thread.start();
 	}
+
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		player1.paint(g);
 		player2.paint(g);
 	}
-	private void init(){
-		/*Initial Actions*/
-		
+
+	private void init() {
+		/* Initial Actions */
+
 	}
+
 	public void run() {
 		init();
-		
+
 		long startTime;
 		long elapsedTime;
 		long wait;
-		
+
 		while (!quit) {
 			if (!pause) {
-				startTime = System.nanoTime(); //Time at start to control framerate
-				/*UPDATE*/
+				startTime = System.nanoTime(); // Time at start to control
+												// framerate
+				/* UPDATE */
 				player1.update();
 				player2.update();
-				/*PAINT*/
+				/* PAINT */
 				repaint();
 				// TODO Convert timing method to use Swing timer instead of
 				// delay()
-				elapsedTime = System.nanoTime() - startTime; //Time at end minus time at start to get difference
-				wait = targetTime - elapsedTime / (long)(1 * Math.pow(10, 9)); // wait to reach 60fps, nanoTime/million to convert units
-				delay((int)wait);
+				elapsedTime = System.nanoTime() - startTime; // Time at end
+																// minus time at
+																// start to get
+																// difference
+				wait = targetTime - elapsedTime / (long) (Math.pow(10, 9)); // wait
+																			// to
+																			// reach
+																			// 60fps,
+																			// nanoTime/billion
+																			// to
+																			// convert
+																			// units
+				delay((int) wait);
 			}
 		}
 	}
