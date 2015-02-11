@@ -19,7 +19,6 @@ public class GameStateManager implements Controllable{
 	
 	public GameStateManager() {
 		gameStates = new ArrayList<GameState>();
-		
 		currentState = 0;
 		gameStates.add(new MenuState(this)); //MenuState will have to be created
 		
