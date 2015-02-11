@@ -5,18 +5,15 @@ import java.awt.Graphics;
  * to be controlled by the game engine
  */
 public interface Controllable {
-
 	/* paint is called once per frame
 	 * paint is handed the whole graphics screen to draw on - don't mess it up!
 	 */
 	public void paint(Graphics g);
-	
 	/* update is called once per frame
 	 * it should update character state and exit
 	 * as quickly as possible.
 	 */
-	public void update();
-	
+	public void update();	
 	/* inputChange is called whenever one of this character's control keys
 	 * are pressed or released. The boolean array "keys" will consist of six
 	 * values corresponding to the keys currently being pressed. They are in
